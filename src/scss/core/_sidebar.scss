@@ -168,6 +168,9 @@
       }
 
       &.nav-dropdown {
+        .nav-dropdown-items {
+          padding-left: 10px !important;
+        }
         &.open {
           background: $sidebar-nav-dropdown-bg;
           @include borders($sidebar-nav-dropdown-borders);

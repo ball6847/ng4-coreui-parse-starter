@@ -11,6 +11,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { SIDEBAR_TOGGLE_DIRECTIVES } from './shared/sidebar.directive';
 import { AsideToggleDirective } from './shared/aside.directive';
 import { BreadcrumbsComponent } from './shared/breadcrumb.component';
+import { MenuComponent } from './shared/menu.component';
 
 // Routing Module
 import { AppRoutingModule } from './app.routing';
@@ -24,6 +25,7 @@ import { AuthenticatedGuard } from './guards/authenticated.guard';
 
 // Services
 import { AuthService } from './services/auth.service';
+import { MenuService } from './services/menu.service';
 
 Parse.initialize("myAppId");
 Parse.serverURL = '/parse';
@@ -43,15 +45,17 @@ Parse.serverURL = '/parse';
     NAV_DROPDOWN_DIRECTIVES,
     BreadcrumbsComponent,
     SIDEBAR_TOGGLE_DIRECTIVES,
-    AsideToggleDirective
+    AsideToggleDirective,
+    MenuComponent
   ],
   providers: [
+    AuthenticatedGuard,
+    AuthService,
+    MenuService,
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
-    AuthenticatedGuard,
-    AuthService
   ],
   bootstrap: [ AppComponent ]
 })

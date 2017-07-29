@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { MenuService } from '../services/menu.service';
+import { MenuItems } from '../services/menu.interface';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './full-layout.component.html'
 })
 export class FullLayoutComponent implements OnInit {
-
+  public menuItems: Observable<MenuItems>;
   public disabled = false;
   public status: { isopen: boolean } = { isopen: false };
 
-  constructor(protected auth: AuthService) {}
+  constructor(protected menu: MenuService) {}
 
   public toggled(open: boolean): void {
     console.log('Dropdown is now: ', open);
@@ -22,6 +24,8 @@ export class FullLayoutComponent implements OnInit {
     this.status.isopen = !this.status.isopen;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.menuItems = this.menu.getMenuItems();
+  }
 
 }
