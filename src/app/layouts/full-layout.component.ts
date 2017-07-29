@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class FullLayoutComponent implements OnInit {
 
   public disabled = false;
-  public status: {isopen: boolean} = {isopen: false};
+  public status: { isopen: boolean } = { isopen: false };
+
+  constructor(protected router: Router) {
+
+  }
 
   public toggled(open: boolean): void {
     console.log('Dropdown is now: ', open);
@@ -20,4 +25,9 @@ export class FullLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  logOut() {
+    Parse.User.logOut()
+      .then(() => this.router.navigate(['/pages/login']));
+  }
 }

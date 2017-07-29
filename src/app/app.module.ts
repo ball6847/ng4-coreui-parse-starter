@@ -17,10 +17,13 @@ import { AppRoutingModule } from './app.routing';
 
 // Layouts
 import { FullLayoutComponent } from './layouts/full-layout.component';
+import { SimpleLayoutComponent } from './layouts/simple-layout.component';
 
+// Guards
+import { Authenticated } from './authguard/authenticated';
 
 Parse.initialize("myAppId");
-Parse.serverURL = 'http://localhost:1337/parse'
+Parse.serverURL = '/parse';
 
 @NgModule({
   imports: [
@@ -33,15 +36,19 @@ Parse.serverURL = 'http://localhost:1337/parse'
   declarations: [
     AppComponent,
     FullLayoutComponent,
+    SimpleLayoutComponent,
     NAV_DROPDOWN_DIRECTIVES,
     BreadcrumbsComponent,
     SIDEBAR_TOGGLE_DIRECTIVES,
     AsideToggleDirective
   ],
-  providers: [{
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    },
+    Authenticated
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

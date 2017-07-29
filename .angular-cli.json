@@ -20,7 +20,7 @@
         "scss/style.scss"
       ],
       "scripts": [
-        "../node_modules/parse/index.js",
+        "../node_modules/parse/dist/parse.js",
         "../node_modules/chart.js/dist/Chart.bundle.min.js",
         "../node_modules/chart.js/dist/Chart.min.js"
       ],

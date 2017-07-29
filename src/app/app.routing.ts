@@ -3,16 +3,21 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Layouts
 import { FullLayoutComponent } from './layouts/full-layout.component';
+import { SimpleLayoutComponent } from './layouts/simple-layout.component';
+
+// Guard
+import { Authenticated } from './authguard/authenticated';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'pages/login',
     pathMatch: 'full',
   },
   {
     path: '',
     component: FullLayoutComponent,
+    canActivate: [ Authenticated ],
     data: {
       title: 'Home'
     },
@@ -22,7 +27,21 @@ export const routes: Routes = [
         loadChildren: './dashboard/dashboard.module#DashboardModule'
       },
     ]
+  },
+  {
+    path: 'pages',
+    component: SimpleLayoutComponent,
+    data: {
+      title: 'Pages'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: './pages/pages.module#PagesModule',
+      }
+    ]
   }
+
 ];
 
 @NgModule({
