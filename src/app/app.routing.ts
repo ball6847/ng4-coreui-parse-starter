@@ -6,7 +6,7 @@ import { FullLayoutComponent } from './layouts/full-layout.component';
 import { SimpleLayoutComponent } from './layouts/simple-layout.component';
 
 // Guard
-import { Authenticated } from './authguard/authenticated';
+import { AuthenticatedGuard } from './guards/authenticated.guard';
 
 export const routes: Routes = [
   {
@@ -17,7 +17,7 @@ export const routes: Routes = [
   {
     path: '',
     component: FullLayoutComponent,
-    canActivate: [ Authenticated ],
+    canActivate: [ AuthenticatedGuard ],
     data: {
       title: 'Home'
     },

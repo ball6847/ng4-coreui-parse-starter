@@ -1,15 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   templateUrl: 'login.component.html'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(protected fb: FormBuilder, protected router: Router) {
+  constructor(
+    protected fb: FormBuilder,
+    protected router: Router,
+    protected auth: AuthService
+  ) {}
+
+  ngOnInit() {
     this.loginForm = this.fb.group({
       identity: ['', Validators.required],
       password: ['', Validators.required]
@@ -24,14 +31,8 @@ export class LoginComponent {
       return;
     }
 
-    Parse.User.logIn(identity, password, {
-      error: (user, error) => {
-        console.log('error', user, error);
-      }
-    })
-    .then(user => {
-      this.router.navigate(['/dashboard']);
-    });
+    this.auth.logIn(identity, password)
+      .then(() => this.router.navigate(['/dashboard']))
+      .catch(error => console.error("There was an error while logging you in:", error.message));
   }
-
 }

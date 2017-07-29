@@ -20,7 +20,10 @@ import { FullLayoutComponent } from './layouts/full-layout.component';
 import { SimpleLayoutComponent } from './layouts/simple-layout.component';
 
 // Guards
-import { Authenticated } from './authguard/authenticated';
+import { AuthenticatedGuard } from './guards/authenticated.guard';
+
+// Services
+import { AuthService } from './services/auth.service';
 
 Parse.initialize("myAppId");
 Parse.serverURL = '/parse';
@@ -47,7 +50,8 @@ Parse.serverURL = '/parse';
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
-    Authenticated
+    AuthenticatedGuard,
+    AuthService
   ],
   bootstrap: [ AppComponent ]
 })
