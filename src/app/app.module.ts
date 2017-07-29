@@ -18,6 +18,10 @@ import { AppRoutingModule } from './app.routing';
 // Layouts
 import { FullLayoutComponent } from './layouts/full-layout.component';
 
+
+Parse.initialize("myAppId");
+Parse.serverURL = 'http://localhost:1337/parse'
+
 @NgModule({
   imports: [
     BrowserModule,
